@@ -9,12 +9,12 @@ case class Task(id: Long, label: String)
 object Task {
 
   def all(): List[Task] = DB.withConnection { implicit c =>
-    SQL("select * from task").as(task *)
+    SQL("select * from tasks").as(task *)
   }
 
   def create(label: String) {
     DB.withConnection { implicit c =>
-      SQL("insert into task (label) values ({label})").on(
+      SQL("insert into tasks (label) values ({label})").on(
         'label -> label
       ).executeUpdate()
     }
@@ -22,7 +22,7 @@ object Task {
 
   def destroy(id: Long) {
     DB.withConnection { implicit c =>
-      SQL("delete from task where id = {id}").on(
+      SQL("delete from tasks where id = {id}").on(
         'id -> id
       ).executeUpdate()
     }

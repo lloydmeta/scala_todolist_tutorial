@@ -2,13 +2,11 @@
 
 # --- !Ups
 
-CREATE SEQUENCE task_id_seq;
-CREATE TABLE task (
-    id integer NOT NULL DEFAULT nextval('task_id_seq'),
+CREATE TABLE tasks (
+    id bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     label varchar(255)
-);
+) Engine=InnoDB;
 
 # --- !Downs
 
-DROP TABLE task;
-DROP SEQUENCE task_id_seq;
+DROP TABLE tasks;
