@@ -17,10 +17,19 @@ object Tasks extends Controller {
 
   }
 
-  def create = Action {
-    Ok{"cool"}
+  def create = Action { implicit request =>
+    taskForm.bindFromRequest.fold(
+      errors => BadRequest(views.html.tasks.index(Task.all(), errors)),
+      label => {
+        Task.create(label)
+        Redirect(routes.Tasks.index)
+      }
+    )
   }
 
-  def destroy (id: Long) = TODO
+  def destroy(id: Long) = Action {
+    Task.destroy(id)
+    Redirect(routes.Tasks.index)
+  }
 
 }
